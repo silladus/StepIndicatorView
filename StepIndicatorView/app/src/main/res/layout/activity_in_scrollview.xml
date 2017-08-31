@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    tools:context="com.silladus.simple.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="horizontal"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="10dp"/>
+
+            <com.silladus.stepindicator.StepView
+                android:id="@+id/mStep"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="vertical"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="10dp"/>
+
+            <com.silladus.stepindicator.StepView
+                android:id="@+id/mStep1"
+                android:layout_width="wrap_content"
+                android:layout_height="127dp"
+                android:background="@android:color/white"
+                android:padding="10dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
