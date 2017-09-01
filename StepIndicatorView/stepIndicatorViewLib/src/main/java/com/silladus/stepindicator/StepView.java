@@ -239,7 +239,7 @@ public class StepView extends LinearLayout {
     }
 
     /**
-     * all drawable could be null
+     * all drawable could be null, all not null else it will be all null
      */
     public StepView setStepDrawables(@Nullable Drawable defaultIcon, @Nullable Drawable completeIcon, @Nullable Drawable attentionIcon) {
         mStepIndicatorView.setStepDrawables(defaultIcon, completeIcon, attentionIcon);
@@ -251,8 +251,9 @@ public class StepView extends LinearLayout {
      * @param mTextPaddingToStepIndicatorView dp
      * {@link #initText()}
      */
-    public void setTextPaddingToStepIndicatorView(float mTextPaddingToStepIndicatorView) {
+    public StepView setTextPaddingToStepIndicatorView(float mTextPaddingToStepIndicatorView) {
         this.mTextPaddingToStepIndicatorView = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mTextPaddingToStepIndicatorView, getResources().getDisplayMetrics()));
+        return this;
     }
 
 }
