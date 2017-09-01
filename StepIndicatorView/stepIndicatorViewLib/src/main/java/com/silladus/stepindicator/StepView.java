@@ -34,6 +34,7 @@ public class StepView extends LinearLayout {
     private int mTextSize = 14;
     private int baseHeightValue = 40;
     private List<TextView> mTextViews;
+    private int mTextPaddingToStepIndicatorView;
 
     public StepView(Context context) {
         this(context, null);
@@ -57,6 +58,7 @@ public class StepView extends LinearLayout {
         };
         setCompletedLineWidth(0.05f * baseHeightValue);
         setCircleRadius(0.28f * baseHeightValue);
+        setTextPaddingToStepIndicatorView(6);
         mTextContainer = new RelativeLayout(getContext());
         setOrientation(HORIZONTAL);
     }
@@ -124,10 +126,10 @@ public class StepView extends LinearLayout {
                     if (getOrientation() == HORIZONTAL) {
                         float measuredWidth = mSteps.get(i).width;
                         mTextView.setX(mCircleCenterPointPositionList.get(i) - measuredWidth / 2f);
-                        mTextView.setPadding(0, 10, 0, 0);
+                        mTextView.setPadding(0, mTextPaddingToStepIndicatorView, 0, 0);
                     } else {
                         mTextView.setY(mCircleCenterPointPositionList.get(i) - mSteps.get(i).lineHeight / 2f);
-                        mTextView.setPadding(10, 0, 0, 0);
+                        mTextView.setPadding(mTextPaddingToStepIndicatorView, 0, 0, 0);
                     }
                     mTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     if (i <= mStepIndicatorView.mCompletingPosition) {
@@ -242,6 +244,15 @@ public class StepView extends LinearLayout {
     public StepView setStepDrawables(@Nullable Drawable defaultIcon, @Nullable Drawable completeIcon, @Nullable Drawable attentionIcon) {
         mStepIndicatorView.setStepDrawables(defaultIcon, completeIcon, attentionIcon);
         return this;
+    }
+
+    /**
+     * text to StepIndicatorView's space
+     * @param mTextPaddingToStepIndicatorView dp
+     * {@link #initText()}
+     */
+    public void setTextPaddingToStepIndicatorView(float mTextPaddingToStepIndicatorView) {
+        this.mTextPaddingToStepIndicatorView = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mTextPaddingToStepIndicatorView, getResources().getDisplayMetrics()));
     }
 
 }
