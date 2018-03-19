@@ -8,11 +8,13 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -56,6 +58,10 @@ public abstract class StepIndicatorView extends View {
     private Drawable mCompleteIcon;
     private Drawable mAttentionIcon;
     private Drawable mDefaultIcon;
+
+    // 在图标上画步数
+    private TextPaint mIconTextPaint;
+    private boolean isDrawIconStepText;
 
     public StepIndicatorView(Context context) {
         this(context, null);
@@ -164,6 +170,7 @@ public abstract class StepIndicatorView extends View {
         drawLines(canvas);
         drawIcon(canvas);
         drawText(canvas);
+        drawIconStepText(canvas);
     }
 
     /**
@@ -258,6 +265,35 @@ public abstract class StepIndicatorView extends View {
             } else {
                 canvas.drawCircle(cx, cy, mCircleRadius, mUnCompletedPaint);
             }
+        }
+    }
+
+    public void setDrawIconStepText(boolean drawIconStepText) {
+        isDrawIconStepText = drawIconStepText;
+    }
+
+    private void drawIconStepText(Canvas canvas) {
+
+        if (!isDrawIconStepText) {
+            return;
+        }
+
+        if (mIconTextPaint == null) {
+            mIconTextPaint = new TextPaint();
+            mIconTextPaint.setAntiAlias(true);
+            mIconTextPaint.setColor(Color.WHITE);
+            mIconTextPaint.setTextSize(mCircleRadius);
+            mIconTextPaint.setTypeface(Typeface.DEFAULT_BOLD);
+        }
+
+        for (int i = 0; i < mCircleCenterPointPositionList.size(); i++) {
+            float currentComplectedXPosition = mCircleCenterPointPositionList.get(i);
+            if (mOrientation == LinearLayout.HORIZONTAL) {
+                canvas.drawText(String.valueOf(i + 1), currentComplectedXPosition - mCenterAxis / 4, mCenterAxis + mCenterAxis / 3, mIconTextPaint);
+            } else {
+                canvas.drawText(String.valueOf(i + 1), mCenterAxis - mCenterAxis / 4, currentComplectedXPosition + mCenterAxis / 3, mIconTextPaint);
+            }
+
         }
     }
 

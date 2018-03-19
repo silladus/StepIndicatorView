@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                         ContextCompat.getDrawable(this, R.drawable.ic_checked_order_progress),
                         ContextCompat.getDrawable(this, R.drawable.ic_check_order_progress_normal))
                 .setLine(Color.GRAY, Paint.Style.FILL, Color.parseColor("#2ca146"), Paint.Style.FILL, 40)
+//                .setDrawIconStepText(true)
                 .setTextColor(Color.WHITE, Color.WHITE);
     }
 
@@ -67,10 +68,12 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < state.length; i++) {
             steps.add(new StepIndicatorView.Step(state[i], text[i]));
         }
-        stepView.setStep(steps, LinearLayout.VERTICAL)
+        stepView.setLineSpacingExtra(10)
+                .setStep(steps, LinearLayout.VERTICAL)
                 .setLine(Color.parseColor("#A3E0D9"), Paint.Style.STROKE, Color.parseColor("#2ca146"), Paint.Style.FILL, 30)
                 .setCompletedLineWidth(1)
                 .setTextSize(12)
+                .setDrawIconStepText(true)
                 .setCircleRadius(10)
         ;
     }

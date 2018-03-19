@@ -88,6 +88,13 @@ public class StepView extends LinearLayout {
         }
     }
 
+    private float mLineSpacingExtra = 5;
+
+    public StepView setLineSpacingExtra(float mLineSpacingExtra) {
+        this.mLineSpacingExtra = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mLineSpacingExtra, getResources().getDisplayMetrics());
+        return this;
+    }
+
     /**
      * to fit the content width and height, should measure all text need space
      */
@@ -95,6 +102,7 @@ public class StepView extends LinearLayout {
         mTextViews = new ArrayList<>();
         for (StepIndicatorView.Step step : mSteps) {
             TextView mTextView = new TextView(getContext());
+            mTextView.setLineSpacing(mLineSpacingExtra, 1f);
             mTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize);
             mTextView.setText(step.text);
             int spec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
@@ -249,10 +257,20 @@ public class StepView extends LinearLayout {
     /**
      * text to StepIndicatorView's space
      * @param mTextPaddingToStepIndicatorView dp
-     * {@link #initText()}
+     * {@link #initText}
      */
     public StepView setTextPaddingToStepIndicatorView(float mTextPaddingToStepIndicatorView) {
         this.mTextPaddingToStepIndicatorView = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mTextPaddingToStepIndicatorView, getResources().getDisplayMetrics()));
+        return this;
+    }
+
+    /**
+     * draw step num to Icon.
+     *
+     * @param drawIconStepText default is false.
+     */
+    public StepView setDrawIconStepText(boolean drawIconStepText) {
+        mStepIndicatorView.setDrawIconStepText(drawIconStepText);
         return this;
     }
 
